@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento de Candidatos</title>
+</head>
+<body>
+    <h1>Recrutamento de Candidatos</h1>
+    <div id="resultado"></div> 
+
+    <script>
+        let continuar = 'S';
+        let resultadoDiv = document.getElementById("resultado");
+        
+        let totalIdade = 0;
+        let totalCandidatos = 0;
+        let totalHomens = 0;
+        let totalMulheres = 0;
+        let totalCandidatosExperiencia = 0;
+
+        while (continuar.toUpperCase() === 'S') {
+            let numeroCandidato = parseInt(prompt("Digite o número do candidato:"));
+            let idade = parseInt(prompt("Digite a idade do candidato:"));
+            let sexo = prompt("Digite o sexo do candidato (M para Masculino, F para Feminino):").toUpperCase();
+            let experiencia = prompt("O candidato tem experiência profissional? (Sim/Não)").toUpperCase();
+
+            totalCandidatos++;
+            totalIdade += idade;
+
+            if (sexo === 'M') {
+                totalHomens++;
+            } else if (sexo === 'F') {
+                totalMulheres++;
+            }
+
+            if (idade >= 18 && experiencia === 'SIM') {
+                totalCandidatosExperiencia++;
+            }
+
+            continuar = prompt("Deseja cadastrar outro candidato (S/N):");
+            if (continuar.toUpperCase() !== 'S' && continuar.toUpperCase() !== 'N') {
+                alert("Opção inválida, por favor, digite S para Sim ou N para Não.");
+                continuar = 'S';
+            }
+        }
+
+        // Calcular a idade média
+        let idadeMedia = totalIdade / totalCandidatos;
+
+        // Exibir os resultados
+        resultadoDiv.innerHTML += `<p>Idade média dos candidatos: ${idadeMedia.toFixed(2)}</p>`;
+        resultadoDiv.innerHTML += `<p>Total de candidatos: ${totalCandidatos}</p>`;
+        resultadoDiv.innerHTML += `<p>Total de homens: ${totalHomens}</p>`;
+        resultadoDiv.innerHTML += `<p>Total de mulheres: ${totalMulheres}</p>`;
+        resultadoDiv.innerHTML += `<p>Total de candidatos com experiência: ${totalCandidatosExperiencia}</p>`;
+    </script>
+</body>
+</html>

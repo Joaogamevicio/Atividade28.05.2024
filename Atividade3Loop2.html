@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Aluno</title>
+</head>
+<body>
+    <h1>Avaliação de Aluno</h1>
+
+    <div id="resultado"></div> 
+
+    <script>
+        function calcularMedia(notas) {
+            let soma = 0;
+            for (let nota of notas) {
+                soma += parseFloat(nota);
+            }
+            return soma / notas.length;
+        }
+
+        let continuar = 'S';
+        let resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = ""; // Limpa o conteúdo anterior
+
+        while (continuar.toUpperCase() === 'S') {
+            let notas = [];
+            let disciplina = prompt("Digite o nome da disciplina:");
+            for (let i = 1; i <= 3; i++) {
+                let nota = parseFloat(prompt(`Digite a nota da ${i}ª prova:`));
+                notas.push(nota);
+            }
+
+            let media = calcularMedia(notas);
+
+            resultadoDiv.innerHTML += `<h2>Disciplina: ${disciplina}</h2>`;
+            resultadoDiv.innerHTML += `<p>Notas: ${notas.join(', ')}</p>`;
+            resultadoDiv.innerHTML += `<p>Média Final: ${media.toFixed(2)}</p>`;
+            if (media >= 7.0) {
+                resultadoDiv.innerHTML += "<p>Aluno Aprovado!</p>";
+            } else {
+                resultadoDiv.innerHTML += "<p>Aluno Reprovado!</p>";
+            }
+
+            let frequencia = parseFloat(prompt(`Digite a frequência do aluno em ${disciplina} (em %):`));
+            let frequenciaMinimaAtingida = (frequencia / 32) * 100 >= 80; // Considerando 32 aulas
+            if (frequenciaMinimaAtingida) {
+                resultadoDiv.innerHTML += `<p>Frequência em ${disciplina}: ${frequencia.toFixed(2)}%</p>`;
+                resultadoDiv.innerHTML += "<p>Frequência Mínima Atingida!</p>";
+            } else {
+                resultadoDiv.innerHTML += `<p>Frequência em ${disciplina}: ${frequencia.toFixed(2)}%</p>`;
+                resultadoDiv.innerHTML += "<p>Frequência Mínima NÃO Atingida!</p>";
+            }
+
+            continuar = prompt("Deseja avaliar outro aluno (S/N):");
+            if (continuar.toUpperCase() !== 'S' && continuar.toUpperCase() !== 'N') {
+                alert("Opção inválida, por favor, digite S para Sim ou N para Não.");
+                continuar = 'S';
+            }
+        }
+    </script>
+</body>
+</html>

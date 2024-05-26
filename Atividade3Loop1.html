@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Qualidade de Peças</title>
+</head>
+<body>
+    <h1>Controle de Qualidade de Peças</h1>
+    <div id="dados"></div> 
+
+    <script>
+        function ControleQualidade() {
+            let continuar = 'S';
+            while (continuar.toUpperCase() === 'S') {
+                let numeroPeca = prompt("Digite o número da peça:");
+                let estadoPeca = prompt("Digite o estado da peça (A para Aprovada, R para Reprovada):");
+                estadoPeca = estadoPeca.toUpperCase();
+
+                let resultado = document.getElementById("dados");
+
+                let peca = document.createElement('div');
+                peca.innerHTML = `
+                    <h2>Peça ${numeroPeca}</h2>
+                    <p>Estado: ${estadoPeca === 'A' ? 'Aprovada' : 'Reprovada'}</p>
+                `;
+                resultado.appendChild(peca);
+
+                continuar = prompt("Deseja cadastrar outra peça (S/N):");
+                if (continuar.toUpperCase() === 'N') {
+                    alert("Controle de qualidade finalizado.");
+                } else if (continuar.toUpperCase() !== 'S') {
+                    alert("Opção inválida, por favor, digite S para Sim ou N para Não.");
+                    continuar = 'S';
+                }
+            }
+        }
+
+        ControleQualidade();
+    </script>
+</body>
+</html>
+
